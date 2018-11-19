@@ -19,6 +19,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".SetupPlan"
+            android:label="@string/title_activity_setup_plan"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".History"
+            android:label="@string/title_activity_history"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".WorkoutCreator"></activity>
     </application>
 
 </manifest>
