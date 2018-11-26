@@ -6,10 +6,13 @@ public class Exercise {
     private int sets;
     private int reps;
 
-    public Exercise(String eName, int sets, int reps){
+    private int weight;
+
+    public Exercise(String eName, int sets, int reps,int weight){
             this.sets = sets;
             this.name = eName;
             this.reps = reps;
+            this.weight = weight;
     }
 
     public String getName() {
@@ -35,6 +38,12 @@ public class Exercise {
     public void setReps(int reps) {
         this.reps = reps;
     }
+    public int getWeight() {
+        return weight;
+    }
 
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
 
 }

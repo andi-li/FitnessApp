@@ -81,4 +81,9 @@
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="title_activity_setup_plan">SetupPlan</string>
     <string name="title_activity_history">History</string>
+    <string name="exercise">Exercise</string>
+    <string name="reps">reps</string>
+    <string name="button">Button</string>
+    <string name="sets">sets</string>
+    <string name="add_exercise">Add Exercise</string>
 </resources>
