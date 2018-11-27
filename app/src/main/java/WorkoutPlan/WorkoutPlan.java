@@ -8,17 +8,17 @@ import java.util.HashMap;
 public class WorkoutPlan {
 
 
-    private HashMap<DateFormat, ArrayList<Exercise>> dayToExercise;
+    private HashMap<String, ArrayList<Exercise>> dayToExercise;
 
-    public WorkoutPlan(HashMap<DateFormat, ArrayList<Exercise>> plan){
+    public WorkoutPlan(HashMap<String, ArrayList<Exercise>> plan){
         this.dayToExercise = plan;
     }
 
-    public HashMap<DateFormat, ArrayList<Exercise>> getDayToExercise() {
+    public HashMap<String, ArrayList<Exercise>> getDayToExercise() {
         return dayToExercise;
     }
 
-    public void setDayToExercise(HashMap<DateFormat, ArrayList<Exercise>> dayToExercise) {
+    public void setDayToExercise(HashMap<String, ArrayList<Exercise>> dayToExercise) {
         this.dayToExercise = dayToExercise;
     }
 

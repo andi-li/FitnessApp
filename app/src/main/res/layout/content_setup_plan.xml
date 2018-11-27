@@ -12,7 +12,7 @@
         android:id="@+id/button5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select Plan"
+        android:text="@string/select_plan"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
@@ -21,10 +21,11 @@
         app:layout_constraintVertical_bias="0.203" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/createPlan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create Plan"
+        android:onClick="createPlan"
         app:layout_constraintBottom_toTopOf="@+id/button7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -40,5 +41,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button6" />
+        app:layout_constraintTop_toBottomOf="@+id/createPlan" />
 </android.support.constraint.ConstraintLayout>

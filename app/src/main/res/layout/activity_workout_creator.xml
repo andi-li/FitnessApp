@@ -1,86 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".WorkoutCreator">
-
-    <LinearLayout
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/parent_linear_layout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="553dp"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:orientation="vertical" >
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/exerciseInput"
+                android:layout_width="180dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:ems="10"
+                android:hint="Exercise(Bench Press)"
+                android:inputType="textPersonName"
+                android:autofillHints="" />
+
+            <EditText
+                android:id="@+id/setsInput"
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:ems="10"
+                android:hint="sets"
+                android:inputType="number"
+                android:autofillHints="" />
+
+            <EditText
+                android:id="@+id/repsInput"
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:ems="10"
+                android:hint="reps"
+                android:inputType="number"
+                android:autofillHints="" />
+
+            <EditText
+                android:id="@+id/weightInput"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:ems="10"
+                android:hint="weight"
+                android:inputType="number"
+                android:autofillHints="" />
+
+            <Button
+                android:id="@+id/delete_button"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@android:drawable/ic_delete"
+                android:onClick="onDelete" />
+
+        </LinearLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:orientation="horizontal" >
 
         <Button
             android:id="@+id/addExercise"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/add_exercise" />
-    </LinearLayout>
+            android:layout_width="195dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="#555"
+            android:onClick="onAddExerciseField"
+            android:paddingLeft="5dp"
+            android:text="Add Exercise"
+            android:textColor="#FFF" />
 
-    <LinearLayout
-        android:layout_width="250dp"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="0dp"
-        android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="7dp"
-            android:layout_marginTop="0dp"
-            android:ems="10"
-            android:hint="@string/exercise"
-            android:importantForAutofill="no"
-            android:inputType="textPersonName" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="75dp"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="334dp"
-        android:layout_marginTop="0dp"
-        android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/editText4"
+        <Spinner
+            android:id="@+id/spinner2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/reps"
-            android:inputType="number"
-            android:autofillHints="" />
+            android:layout_height="match_parent"
+            android:layout_weight="7"
+            android:entries="@array/days_of_the_week"
+            android:gravity="right" />
+
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="75dp"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="256dp"
-        android:layout_marginTop="0dp"
-        android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/editText5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/sets"
-            android:inputType="number"
-            android:importantForAutofill="no" />
     </LinearLayout>
-
-
-</RelativeLayout>
+</ScrollView>

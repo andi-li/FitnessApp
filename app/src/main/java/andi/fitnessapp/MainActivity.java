@@ -26,10 +26,10 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab =  findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -38,16 +38,25 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView =  findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        setupButton = (Button) findViewById(R.id.settings);
+
+
+
+    }
+
+    public void goToHistory(View v){
+            //TODO
+    }
+    public void goToSetup(View v){
+        setupButton = findViewById(R.id.setup);
 
         setupButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
@@ -55,20 +64,20 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
+    }
 
-        historyButton = (Button) findViewById(R.id.history);
+    public void goToWorkout(View v){
+        //TODO
+    }
+    public void goToSettings(View v){
+        settingsButton = findViewById(R.id.settings);
 
-        historyButton.setOnClickListener(new View.OnClickListener(){
+        settingsButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                Intent intent = new Intent(MainActivity.this,History.class);
+                Intent intent = new Intent(MainActivity.this,SettingsActivity.class);
                 startActivity(intent);
             }
         });
-
-
-    }
-    public void openActivity( ){
-
     }
 
     @Override
