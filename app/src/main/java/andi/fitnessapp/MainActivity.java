@@ -47,29 +47,15 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView =  findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-
-
-    }
-
-    public void goToHistory(View v){
-            //TODO
-    }
-    public void goToSetup(View v){
         setupButton = findViewById(R.id.setup);
 
         setupButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                Intent intent = new Intent(MainActivity.this,SetupPlan.class);
+                Intent intent = new Intent(MainActivity.this,SetupDayOfTheWeek.class);
                 startActivity(intent);
             }
         });
-    }
 
-    public void goToWorkout(View v){
-        //TODO
-    }
-    public void goToSettings(View v){
         settingsButton = findViewById(R.id.settings);
 
         settingsButton.setOnClickListener(new View.OnClickListener(){
@@ -78,8 +64,8 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
-    }
 
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

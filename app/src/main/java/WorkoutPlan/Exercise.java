@@ -38,6 +38,7 @@ public class Exercise {
     public void setReps(int reps) {
         this.reps = reps;
     }
+
     public int getWeight() {
         return weight;
     }

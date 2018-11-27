@@ -28,9 +28,6 @@ public class SetupPlan extends AppCompatActivity {
             }
         });
 
-
-    }
-    public void createPlan(View v){
         setupButton = findViewById(R.id.createPlan);
 
         setupButton.setOnClickListener(new View.OnClickListener(){
@@ -40,5 +37,6 @@ public class SetupPlan extends AppCompatActivity {
             }
         });
     }
+
 
 }
