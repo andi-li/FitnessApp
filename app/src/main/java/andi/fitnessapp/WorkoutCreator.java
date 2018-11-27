@@ -6,18 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 
-import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-import WorkoutPlan.Exercise;
+import workoutplan.Exercise;
 
 public class WorkoutCreator extends AppCompatActivity {
 
@@ -36,6 +31,7 @@ public class WorkoutCreator extends AppCompatActivity {
 
     private HashMap<String, ArrayList<Exercise>> weeklyWorkout;
     private ArrayList<Exercise> dailyWorkout = new ArrayList<Exercise>();
+
 
     private Exercise exerciseObj;
 
@@ -70,8 +66,6 @@ public class WorkoutCreator extends AppCompatActivity {
                 exerciseObj = new Exercise(exercise,sets,reps,weight);
                 dailyWorkout.add(exerciseObj);
             }
-
-
         }
         // Add the new row before the add field button.
         parentLinearLayout.addView(rowView, parentLinearLayout.getChildCount() - 1);

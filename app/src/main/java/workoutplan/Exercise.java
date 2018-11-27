@@ -1,4 +1,4 @@
-package WorkoutPlan;
+package workoutplan;
 
 public class Exercise {
 
