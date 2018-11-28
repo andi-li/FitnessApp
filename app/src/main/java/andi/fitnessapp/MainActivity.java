@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity
 
         setupButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                Intent intent = new Intent(MainActivity.this,SetupDayOfTheWeek.class);
+                Intent intent = new Intent(MainActivity.this,SetupPlan.class);
                 startActivity(intent);
             }
         });
