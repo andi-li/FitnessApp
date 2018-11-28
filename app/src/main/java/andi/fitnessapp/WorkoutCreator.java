@@ -9,6 +9,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.google.gson.Gson;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -21,10 +26,10 @@ public class WorkoutCreator extends AppCompatActivity {
     private EditText setsInput;
     private EditText repsInput;
     private EditText weightInput;
-    private EditText nameOfWorkout;
+    private EditText nameOfWorkoutInput;
 
     private LinearLayout parentLinearLayout;
-    private String exercise, dayOfTheWeek;
+    private String exercise, dayOfTheWeek,nameOfWorkout;
     private int sets;
     private int reps;
     private int weight;
@@ -50,7 +55,7 @@ public class WorkoutCreator extends AppCompatActivity {
         final View rowView = inflater.inflate(R.layout.exercise_field, null);
 
         dailyWorkout = new ArrayList<Exercise>(); //MAYBE FIX LATER
-
+        nameOfWorkoutInput = parentLinearLayout.getChildAt(0).findViewById(R.id.nameOfWorkout);
         for(int i = 1;i<parentLinearLayout.getChildCount();i++){
             exerciseInput = parentLinearLayout.getChildAt(i).findViewById(R.id.exerciseInput);
             setsInput = parentLinearLayout.getChildAt(i).findViewById(R.id.setsInput);
@@ -58,7 +63,8 @@ public class WorkoutCreator extends AppCompatActivity {
             weightInput = parentLinearLayout.getChildAt(i).findViewById(R.id.weightInput);
 
 
-            if(exerciseInput !=null){
+            if(exerciseInput !=null && setsInput != null && repsInput !=null){
+                nameOfWorkout = nameOfWorkoutInput.getText().toString();
                 exercise = exerciseInput.getText().toString();
                 sets = Integer.valueOf(setsInput.getText().toString());
                 reps = Integer.valueOf(repsInput.getText().toString());
@@ -76,10 +82,19 @@ public class WorkoutCreator extends AppCompatActivity {
     public void  finishCreating(View v){
         weeklyWorkout = new HashMap<String, ArrayList<Exercise>>();
         weeklyWorkout.put(dayOfTheWeek,dailyWorkout);
+        Gson gson = new Gson();
+        String json = gson.toJson(weeklyWorkout);
+        String filename = nameOfWorkout + ".json";
+        String fileContents = json;
+        FileOutputStream outputStream;
 
-        Intent intent = new Intent(WorkoutCreator.this,SetupDayOfTheWeek.class);
-        intent.putExtra("weeklyWorkout",weeklyWorkout);
-        startActivity(intent);
+        try {
+            outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
+            outputStream.write(fileContents.getBytes());
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     }
-}

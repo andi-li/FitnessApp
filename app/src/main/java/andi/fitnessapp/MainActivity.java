@@ -65,6 +65,14 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        startWorkoutButton = findViewById(R.id.startWorkout);
+        startWorkoutButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent intent = new Intent(MainActivity.this,StartWorkout.class);
+                startActivity(intent);
+            }
+        });
+
     }
     @Override
     public void onBackPressed() {

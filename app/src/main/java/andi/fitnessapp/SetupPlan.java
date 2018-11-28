@@ -32,7 +32,7 @@ public class SetupPlan extends AppCompatActivity {
 
         setupButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                Intent intent = new Intent(SetupPlan.this,WorkoutCreator.class);
+                Intent intent = new Intent(SetupPlan.this,SetupDayOfTheWeek.class);
                 startActivity(intent);
             }
         });
