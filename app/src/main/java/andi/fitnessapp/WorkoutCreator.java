@@ -10,16 +10,23 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import workoutplan.Exercise;
 
 public class WorkoutCreator extends AppCompatActivity {
+
 
 
     private EditText exerciseInput;
@@ -45,9 +52,22 @@ public class WorkoutCreator extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout_creator);
         parentLinearLayout = findViewById(R.id.parent_linear_layout);
-
+        weeklyWorkout = new HashMap<String, ArrayList<Exercise>>();
         Intent intent = getIntent();
         dayOfTheWeek = intent.getStringExtra(SetupDayOfTheWeek.DAY_OF_WEEK);
+
+        try {
+            Gson gson = new Gson();
+            Type type = new TypeToken<HashMap<String, ArrayList<Exercise>>>(){}.getType();
+            InputStream is = openFileInput("workout1.json");//this.getAssets().open("workout1.json");
+            BufferedReader r = new BufferedReader(new InputStreamReader(is));
+            //convert the json string back to object
+            weeklyWorkout = gson.fromJson(r, type);
+            System.out.println(weeklyWorkout.toString());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
     public void onAddExerciseField(View v){
@@ -80,7 +100,6 @@ public class WorkoutCreator extends AppCompatActivity {
         parentLinearLayout.removeView((View) v.getParent());
     }
     public void  finishCreating(View v){
-        weeklyWorkout = new HashMap<String, ArrayList<Exercise>>();
         weeklyWorkout.put(dayOfTheWeek,dailyWorkout);
         Gson gson = new Gson();
         String json = gson.toJson(weeklyWorkout);

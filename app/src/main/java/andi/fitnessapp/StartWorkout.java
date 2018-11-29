@@ -44,7 +44,7 @@ public class StartWorkout extends AppCompatActivity {
 
         try {
 
-            InputStream is = this.getAssets().open("workout1.json");
+            InputStream is = openFileInput("workout1.json");//this.getAssets().open("workout1.json");
             BufferedReader r = new BufferedReader(new InputStreamReader(is));
             //convert the json string back to object
             map = gson.fromJson(r, type);
