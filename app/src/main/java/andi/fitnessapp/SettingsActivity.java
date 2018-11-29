@@ -1,9 +1,8 @@
 package andi.fitnessapp;
 
-import android.app.Activity;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
