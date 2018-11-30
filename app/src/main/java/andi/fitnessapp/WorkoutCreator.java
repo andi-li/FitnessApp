@@ -6,8 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TableRow;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -27,7 +30,7 @@ import workoutplan.Exercise;
 
 public class WorkoutCreator extends AppCompatActivity {
 
-
+    private ListView listView;
 
     private EditText exerciseInput;
     private EditText setsInput;
@@ -63,7 +66,6 @@ public class WorkoutCreator extends AppCompatActivity {
             BufferedReader r = new BufferedReader(new InputStreamReader(is));
             //convert the json string back to object
             weeklyWorkout = gson.fromJson(r, type);
-            System.out.println(weeklyWorkout.toString());
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -92,8 +94,7 @@ public class WorkoutCreator extends AppCompatActivity {
                 exerciseObj = new Exercise(exercise,sets,reps,weight);
                 dailyWorkout.add(exerciseObj);
             }
-        }
-        // Add the new row before the add field button.
+        }        // Add the new row before the add field button.
         parentLinearLayout.addView(rowView, parentLinearLayout.getChildCount() - 1);
     }
     public void onDelete(View v) {

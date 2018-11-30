@@ -3,34 +3,45 @@ package andi.fitnessapp;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
-import com.google.gson.Gson;
+import org.w3c.dom.Text;
 
-import java.io.FileOutputStream;
+import java.io.File;
 import java.util.ArrayList;
 
 
 public class SettingsActivity extends AppCompatActivity {
-    public SharedPreferences preferences;
-    public SharedPreferences.Editor editor;
-    public static final String PREF_FILE_NAME = "PrefFile";
+
+    private Spinner dSpinner;
+    private Spinner eSpinner;
+    private ArrayList<String> listOfWorkouts;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        preferences = getSharedPreferences(PREF_FILE_NAME, MODE_PRIVATE);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        Spinner spinner = (Spinner) findViewById(R.id.daySpinner);
-        String dayOfTheWeek= spinner.getSelectedItem().toString();
-        editor = preferences.edit();
-        editor.putString("DayOfTheWeek",dayOfTheWeek);
-        editor.apply();
+        listOfWorkouts = new ArrayList<String>();
+        dSpinner = findViewById(R.id.daySpinner);
+        eSpinner = findViewById(R.id.workoutSpinner);
+        File file = this.getFilesDir();
+        File[] arrFile = file.listFiles();
+
+        for(int i = 0;i<arrFile.length;i++){
+            if(arrFile[i].getName().endsWith(".json")){
+                listOfWorkouts.add(arrFile[i].getName().substring(0,arrFile[i].getName().length()-5));
+            }
+        }
+        ArrayAdapter<String> workoutAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,listOfWorkouts);
+        workoutAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        eSpinner.setAdapter(workoutAdapter);
 
 // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -38,8 +49,7 @@ public class SettingsActivity extends AppCompatActivity {
 // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
-
+        dSpinner.setAdapter(adapter);
     }
     @Override
     protected void onResume(){
@@ -60,22 +70,23 @@ public class SettingsActivity extends AppCompatActivity {
         int myInt = savedInstanceState.getInt("MyInt");
         String myString = savedInstanceState.getString("MyString");
     }
+    public void save(View v) {
 
-    public void  objToJson(Object o,String s){
-        Gson gson = new Gson();
-        String json = gson.toJson(o);
-        String filename = s + ".json";
-        String fileContents = json;
-        FileOutputStream outputStream;
-
-        try {
-            outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
-            outputStream.write(fileContents.getBytes());
-            outputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        setDefaults("DayOfTheWeek",getSpinnerStringValue(dSpinner),this);
+        setDefaults("workout",getSpinnerStringValue(eSpinner),this);
     }
+    public static void setDefaults(String key, String value, Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(key, value);
+        editor.commit();
+    }
+    public static String getSpinnerStringValue(Spinner s){
+        TextView textView = (TextView) s.getSelectedView();
+        String result = textView.getText().toString();
+        return result;
+    }
+
 
 
 }

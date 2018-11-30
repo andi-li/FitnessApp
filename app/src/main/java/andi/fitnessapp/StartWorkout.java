@@ -1,5 +1,6 @@
 package andi.fitnessapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -10,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -18,34 +18,28 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+
 
 import workoutplan.Exercise;
 
 public class StartWorkout extends AppCompatActivity {
     private HashMap<String, ArrayList<Exercise>> map;
     private ArrayList<Exercise> exercisesList;
-    SharedPreferences preferences;
 
-    private Button done;
-    private Button undo;
     private ListView listView;
     int counter = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        preferences = PreferenceManager.getDefaultSharedPreferences(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_workout);
+
         Type type = new TypeToken<HashMap<String, ArrayList<Exercise>>>(){}.getType();
-        Type type1 = new TypeToken<ArrayList<String>>(){}.getType();
         Gson gson = new Gson();
 
         try {
@@ -59,8 +53,8 @@ public class StartWorkout extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String storedPreference = preferences.getString("DayOfTheWeek", "NULL");
-        exercisesList = map.get("Monday");
+        String storedPreference = getDefaults("DayOfTheWeek",this);
+        exercisesList = map.get(storedPreference);
         listView = findViewById(R.id.workoutListview);
         CustomAdapter adapter = new CustomAdapter();
         listView.setAdapter(adapter);
@@ -109,21 +103,7 @@ public class StartWorkout extends AppCompatActivity {
             return view;
         }
     }
-    public String loadJSONFromAsset() {
-        String json = null;
-        try {
-            InputStream is = this.getAssets().open("yourfilename.json");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        return json;
-    }
+
     public void exerciseDone(View v){
         int setCounter = 0;
         for(int i = 0;i<exercisesList.size();i++){
@@ -140,6 +120,10 @@ public class StartWorkout extends AppCompatActivity {
             counter--;
         }
         listView.getChildAt(counter).setBackgroundColor(Color.WHITE);
+    }
+    public static String getDefaults(String key, Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getString(key, null);
     }
 
 
