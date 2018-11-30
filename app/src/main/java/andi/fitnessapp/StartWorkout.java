@@ -1,7 +1,9 @@
 package andi.fitnessapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -31,21 +33,25 @@ import workoutplan.Exercise;
 public class StartWorkout extends AppCompatActivity {
     private HashMap<String, ArrayList<Exercise>> map;
     private ArrayList<Exercise> exercisesList;
+    SharedPreferences preferences;
+
     private Button done;
     private Button undo;
     private ListView listView;
     int counter = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_workout);
         Type type = new TypeToken<HashMap<String, ArrayList<Exercise>>>(){}.getType();
+        Type type1 = new TypeToken<ArrayList<String>>(){}.getType();
         Gson gson = new Gson();
 
         try {
+            InputStream is1 = openFileInput("workout1.json");//this.getAssets().open("workout1.json");
+            BufferedReader r = new BufferedReader(new InputStreamReader(is1));
 
-            InputStream is = openFileInput("workout1.json");//this.getAssets().open("workout1.json");
-            BufferedReader r = new BufferedReader(new InputStreamReader(is));
             //convert the json string back to object
             map = gson.fromJson(r, type);
             System.out.println(map.toString());
@@ -53,6 +59,7 @@ public class StartWorkout extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        String storedPreference = preferences.getString("DayOfTheWeek", "NULL");
         exercisesList = map.get("Monday");
         listView = findViewById(R.id.workoutListview);
         CustomAdapter adapter = new CustomAdapter();
