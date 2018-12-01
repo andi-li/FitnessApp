@@ -33,7 +33,11 @@
                 android:value="andi.fitnessapp.MainActivity" />
         </activity>
         <activity android:name=".WorkoutCreator" />
-        <activity android:name=".SetupDayOfTheWeek"></activity>
+        <activity android:name=".SetupDayOfTheWeek" />
+        <activity android:name=".WorkoutEditSelector" />
+        <activity android:name=".EditWorkout" />
+        <activity android:name=".History" />
+        <activity android:name=".HistoryWorkoutViewer"></activity>
     </application>
 
 </manifest>

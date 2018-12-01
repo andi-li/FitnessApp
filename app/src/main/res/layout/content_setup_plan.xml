@@ -9,7 +9,7 @@
     tools:showIn="@layout/activity_setup_plan">
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/editPlan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Edit Plan"
@@ -29,7 +29,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button5" />
+        app:layout_constraintTop_toBottomOf="@+id/editPlan" />
 
     <Button
         android:id="@+id/button7"

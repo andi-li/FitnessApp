@@ -7,10 +7,21 @@
     tools:context=".SetupDayOfTheWeek">
 
 
+    <EditText
+        android:id="@+id/WorkoutName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="10"
+        android:hint="Workout Name (Workout 1)"
+        android:layout_gravity="center"
+        android:inputType="textPersonName" />
+
     <Button
         android:id="@+id/Monday"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="monday"
         android:layout_weight="1"
         android:text="Monday" />
 
@@ -19,6 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:onClick="tuesday"
         android:text="Tuesday" />
     <Button
         android:id="@+id/Wednesday"

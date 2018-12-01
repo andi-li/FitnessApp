@@ -12,6 +12,8 @@ import android.widget.Button;
 public class SetupPlan extends AppCompatActivity {
 
     private Button setupButton;
+    private Button editButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,16 @@ public class SetupPlan extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        editButton = findViewById(R.id.editPlan);
+
+        editButton.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                Intent intent = new Intent(SetupPlan.this,WorkoutEditSelector.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
 

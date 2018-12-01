@@ -57,12 +57,13 @@ public class WorkoutCreator extends AppCompatActivity {
         parentLinearLayout = findViewById(R.id.parent_linear_layout);
         weeklyWorkout = new HashMap<String, ArrayList<Exercise>>();
         Intent intent = getIntent();
+        nameOfWorkout = intent.getStringExtra(SetupDayOfTheWeek.EXERCISE_NAME);
         dayOfTheWeek = intent.getStringExtra(SetupDayOfTheWeek.DAY_OF_WEEK);
 
         try {
             Gson gson = new Gson();
             Type type = new TypeToken<HashMap<String, ArrayList<Exercise>>>(){}.getType();
-            InputStream is = openFileInput("workout1.json");//this.getAssets().open("workout1.json");
+            InputStream is = openFileInput(nameOfWorkout + ".json");//this.getAssets().open("workout1.json");
             BufferedReader r = new BufferedReader(new InputStreamReader(is));
             //convert the json string back to object
             weeklyWorkout = gson.fromJson(r, type);
@@ -77,8 +78,8 @@ public class WorkoutCreator extends AppCompatActivity {
         final View rowView = inflater.inflate(R.layout.exercise_field, null);
 
         dailyWorkout = new ArrayList<Exercise>(); //MAYBE FIX LATER
-        nameOfWorkoutInput = parentLinearLayout.getChildAt(0).findViewById(R.id.nameOfWorkout);
-        for(int i = 1;i<parentLinearLayout.getChildCount();i++){
+
+        for(int i = 0;i<parentLinearLayout.getChildCount();i++){
             exerciseInput = parentLinearLayout.getChildAt(i).findViewById(R.id.exerciseInput);
             setsInput = parentLinearLayout.getChildAt(i).findViewById(R.id.setsInput);
             repsInput =  parentLinearLayout.getChildAt(i).findViewById(R.id.repsInput);
@@ -86,7 +87,6 @@ public class WorkoutCreator extends AppCompatActivity {
 
 
             if(exerciseInput !=null && setsInput != null && repsInput !=null){
-                nameOfWorkout = nameOfWorkoutInput.getText().toString();
                 exercise = exerciseInput.getText().toString();
                 sets = Integer.valueOf(setsInput.getText().toString());
                 reps = Integer.valueOf(repsInput.getText().toString());
@@ -100,6 +100,7 @@ public class WorkoutCreator extends AppCompatActivity {
     public void onDelete(View v) {
         parentLinearLayout.removeView((View) v.getParent());
     }
+
     public void  finishCreating(View v){
         weeklyWorkout.put(dayOfTheWeek,dailyWorkout);
         Gson gson = new Gson();

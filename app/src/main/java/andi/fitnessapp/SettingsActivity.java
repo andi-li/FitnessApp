@@ -71,7 +71,6 @@ public class SettingsActivity extends AppCompatActivity {
         String myString = savedInstanceState.getString("MyString");
     }
     public void save(View v) {
-
         setDefaults("DayOfTheWeek",getSpinnerStringValue(dSpinner),this);
         setDefaults("workout",getSpinnerStringValue(eSpinner),this);
     }

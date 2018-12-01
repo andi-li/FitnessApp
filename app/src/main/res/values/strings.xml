@@ -97,4 +97,5 @@
     <string name="sets">sets</string>
     <string name="add_exercise">Add Exercise</string>
     <string name="select_plan">Select Plan</string>
+    <string name="title_activity_edit_workout">EditWorkout</string>
 </resources>
