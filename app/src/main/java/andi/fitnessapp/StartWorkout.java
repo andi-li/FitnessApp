@@ -21,6 +21,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,6 +37,8 @@ import java.util.HashMap;
 import workoutplan.Exercise;
 
 public class StartWorkout extends AppCompatActivity {
+    private int setCounter = 0;
+    private CustomAdapter adapter;
     private HashMap<String, ArrayList<Exercise>> map;
     private ArrayList<Exercise> exercisesList;
     private ArrayList<String> workoutHistory;
@@ -43,7 +46,7 @@ public class StartWorkout extends AppCompatActivity {
     private Chronometer totalChronometer;
     private ListView listView;
     private long offset;
-    int counter = 0;
+    private int counter = 0;
     private boolean running;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +54,6 @@ public class StartWorkout extends AppCompatActivity {
         setContentView(R.layout.activity_start_workout);
         chronometer = findViewById(R.id.Timer);
         totalChronometer = findViewById(R.id.totalTimer);
-
         chronometer.setBase(SystemClock.elapsedRealtime());
         totalChronometer.setBase(SystemClock.elapsedRealtime());
 
@@ -59,11 +61,10 @@ public class StartWorkout extends AppCompatActivity {
         Gson gson = new Gson();
         String settingsPreference = getDefaults("DayOfTheWeek",this);
         String exerciseFile = getDefaults("workout",this);
-        try {
-            InputStream is1 = openFileInput(exerciseFile + ".json");//this.getAssets().open("workout1.json");
-            BufferedReader r = new BufferedReader(new InputStreamReader(is1));
 
-            //convert the json string back to object
+        try {
+            InputStream is1 = openFileInput(exerciseFile + ".json");
+            BufferedReader r = new BufferedReader(new InputStreamReader(is1));
             map = gson.fromJson(r, type);
             System.out.println(map.toString());
 
@@ -72,8 +73,13 @@ public class StartWorkout extends AppCompatActivity {
         }
 
         exercisesList = map.get(settingsPreference);
+
+        for(int i = 0;i<exercisesList.size();i++){
+            setCounter+=exercisesList.get(i).getSets();
+        }
+
         listView = findViewById(R.id.workoutListview);
-        CustomAdapter adapter = new CustomAdapter();
+        adapter = new CustomAdapter();
         listView.setAdapter(adapter);
         totalChronometer.start();
     }
@@ -81,10 +87,6 @@ public class StartWorkout extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            int setCounter = 0;
-            for(int i = 0;i<exercisesList.size();i++){
-                setCounter+=exercisesList.get(i).getSets();
-            }
             return setCounter;
         }
 
@@ -123,36 +125,35 @@ public class StartWorkout extends AppCompatActivity {
     }
 
     public void exerciseDone(View v){
-        int setCounter = 0;
-        for(int i = 0;i<exercisesList.size();i++){
-            setCounter+=exercisesList.get(i).getSets();
-        }
-        listView.getChildAt(counter).setBackgroundColor(Color.GREEN);
-        if(counter<setCounter){
-            counter++;
-        }
-        if(running){
-            chronometer.setBase(SystemClock.elapsedRealtime());
-            offset = 0;
-        }
-        if(counter == setCounter){
-            String exerciseFile = getDefaults("workout",this);
-            String settingsPreference = getDefaults("DayOfTheWeek",this);
-            workoutHistory = new ArrayList<String>();
-            workoutHistory.add(LocalDateTime.now()
-                    .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + ": " + exerciseFile + "/" + settingsPreference);
-            Gson gson = new Gson();
-            String json = gson.toJson(workoutHistory);
-            String filename = "History.json";
-            String fileContents = json;
-            FileOutputStream outputStream;
 
-            try {
-                outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
-                outputStream.write(fileContents.getBytes());
-                outputStream.close();
-            } catch (Exception e) {
-                e.printStackTrace();
+        if(counter < setCounter){
+            listView.getChildAt(counter).setBackgroundColor(Color.GREEN);
+
+            counter++;
+
+            if(running){
+                chronometer.setBase(SystemClock.elapsedRealtime());
+                offset = 0;
+            }
+            if(counter == setCounter){
+                String exerciseFile = getDefaults("workout",this);
+                String settingsPreference = getDefaults("DayOfTheWeek",this);
+                workoutHistory = new ArrayList<String>();
+                workoutHistory.add(LocalDateTime.now()
+                        .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + ": " + exerciseFile + "/" + settingsPreference);
+                Gson gson = new Gson();
+                String json = gson.toJson(workoutHistory);
+                String filename = "History.json";
+                String fileContents = json;
+                FileOutputStream outputStream;
+
+                try {
+                    outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
+                    outputStream.write(fileContents.getBytes());
+                    outputStream.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
 
@@ -187,6 +188,7 @@ public class StartWorkout extends AppCompatActivity {
         }
 
     }
+
 
 
 

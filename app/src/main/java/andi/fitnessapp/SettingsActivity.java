@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ import org.w3c.dom.Text;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class SettingsActivity extends AppCompatActivity {
@@ -27,7 +29,8 @@ public class SettingsActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-
+        String settingsDayPreference = getDefaults("DayOfTheWeek",this);
+        String exerciseFile = getDefaults("workout",this);
         listOfWorkouts = new ArrayList<String>();
         dSpinner = findViewById(R.id.daySpinner);
         eSpinner = findViewById(R.id.workoutSpinner);
@@ -49,7 +52,10 @@ public class SettingsActivity extends AppCompatActivity {
 // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 // Apply the adapter to the spinner
+
         dSpinner.setAdapter(adapter);
+        dSpinner.setSelection(retrieveAllStringsAndGetIndex(dSpinner,settingsDayPreference));
+        eSpinner.setSelection(retrieveAllStringsAndGetIndex(eSpinner,exerciseFile));
     }
     @Override
     protected void onResume(){
@@ -63,12 +69,7 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        // Restore UI state from the savedInstanceState.
-        // This bundle has also been passed to onCreate.
-        boolean myBoolean = savedInstanceState.getBoolean("MyBoolean");
-        double myDouble = savedInstanceState.getDouble("myDouble");
-        int myInt = savedInstanceState.getInt("MyInt");
-        String myString = savedInstanceState.getString("MyString");
+
     }
     public void save(View v) {
         setDefaults("DayOfTheWeek",getSpinnerStringValue(dSpinner),this);
@@ -84,6 +85,29 @@ public class SettingsActivity extends AppCompatActivity {
         TextView textView = (TextView) s.getSelectedView();
         String result = textView.getText().toString();
         return result;
+    }
+    public int retrieveAllStringsAndGetIndex(Spinner s,String info){
+        int index=0;
+        Adapter adapter = s.getAdapter();
+        int n = adapter.getCount();
+        List<String> stringList = new ArrayList<String>(n);
+        for (int i = 0; i < n; i++) {
+            String str = (String) adapter.getItem(i);
+            stringList.add(str);
+        }
+        for(int i = 0;i<stringList.size();i++){
+            if(info.equals(stringList.get(i))){
+                index = i;
+                break;
+            }
+        }
+        return index;
+
+
+    }
+    public static String getDefaults(String key, Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getString(key, null);
     }
 
 
