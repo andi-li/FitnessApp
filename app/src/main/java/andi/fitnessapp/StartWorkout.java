@@ -102,20 +102,28 @@ public class StartWorkout extends AppCompatActivity {
 
         @Override
         public View getView(int i, View view, ViewGroup viewGroup) {
-            view = getLayoutInflater().inflate(R.layout.custom_view_workout,null);
+            View row = null;
+            view = null;
+            row = view;
             TextView info = view.findViewById(R.id.workoutInfo);
             ArrayList<String> exercise = new ArrayList<String>();
             ArrayList<Integer> reps = new ArrayList<Integer>();
             ArrayList<Integer> weight = new ArrayList<Integer>();
-            for(int j = 0;j<exercisesList.size();j++){
-                int k=0;
-                while(k<exercisesList.get(j).getSets()){
-                    exercise.add(exercisesList.get(j).getName());
-                    reps.add(exercisesList.get(j).getReps());
-                    weight.add(exercisesList.get(j).getWeight());
-                    k++;
+            if(view == null){
+                view = getLayoutInflater().inflate(R.layout.custom_view_workout,null);
+
+
+                for(int j = 0;j<exercisesList.size();j++){
+                    int k=0;
+                    while(k<exercisesList.get(j).getSets()){
+                        exercise.add(exercisesList.get(j).getName());
+                        reps.add(exercisesList.get(j).getReps());
+                        weight.add(exercisesList.get(j).getWeight());
+                        k++;
+            }
+
                 }
-                k=0;
+
 
             }
             info.setText(exercise.get(i) + ": " +  reps.get(i).toString() +" X " + weight.get(i).toString());
