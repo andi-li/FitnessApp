@@ -47,4 +47,10 @@ public class Exercise {
         this.weight = weight;
     }
 
+    @Override
+    public String toString(){
+        String s = name + ": " +  Integer.toString(reps) +" X " +Integer.toString(weight);
+        return s;
+    }
+
 }
