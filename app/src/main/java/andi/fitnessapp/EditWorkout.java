@@ -32,7 +32,6 @@ public class EditWorkout extends AppCompatActivity {
 
     private ListView editListView;
     private Button loadWorkoutButton;
-    private String dayOfTheWeek;
     private Spinner daySpinner;
     private String workoutName;
     private HashMap<String, ArrayList<Exercise>> weeklyWorkout;

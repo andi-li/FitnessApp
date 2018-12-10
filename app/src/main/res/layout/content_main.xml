@@ -45,7 +45,7 @@
     <Button
         android:id="@+id/startWorkout"
         android:layout_width="168dp"
-        android:layout_height="72dp"
+        android:layout_height="71dp"
         android:text="Start Workout"
         app:layout_constraintBottom_toTopOf="@+id/setup"
         app:layout_constraintEnd_toEndOf="parent"

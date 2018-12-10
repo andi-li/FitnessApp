@@ -38,6 +38,7 @@ public class History extends AppCompatActivity {
         String path = getFilesDir().getAbsolutePath() + "/" + "History.json";
 
         File file = new File(path);
+
         if(file.exists()) {
             try {
                 Gson gson = new Gson();

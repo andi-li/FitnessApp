@@ -1,7 +1,9 @@
 package andi.fitnessapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -14,6 +16,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+
+import java.io.File;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -46,6 +50,25 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView =  findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //set up folders in external directory
+        String workoutFolder = "WorkoutFolder";
+        File workoutFile = new File(Environment.getExternalStorageDirectory(),workoutFolder);
+        if(!workoutFile.exists()){
+            workoutFile.mkdirs();
+        }
+
+        String historyFolder = "HistoryFolder";
+        File historyFile = new File(Environment.getExternalStorageDirectory(),historyFolder);
+        if(!historyFile.exists()){
+            historyFile.mkdirs();
+        }
+
+        //setup dir in internal memory
+        File historyDir = this.getDir("HistoryDir", Context.MODE_PRIVATE);
+        if(!historyDir.exists()){
+            historyDir.mkdirs();
+        }
 
         setupButton = findViewById(R.id.setup);
 

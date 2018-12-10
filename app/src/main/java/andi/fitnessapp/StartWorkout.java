@@ -5,10 +5,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.icu.text.SimpleDateFormat;
+import android.os.Environment;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView.ViewHolder;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -38,7 +42,6 @@ import workoutplan.Exercise;
 
 public class StartWorkout extends AppCompatActivity {
     private int setCounter = 0;
-    private CustomAdapter adapter;
     private HashMap<String, ArrayList<Exercise>> map;
     private ArrayList<Exercise> exercisesList;
     private ArrayList<String> workoutHistory;
@@ -52,10 +55,35 @@ public class StartWorkout extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_workout);
+
         chronometer = findViewById(R.id.Timer);
         totalChronometer = findViewById(R.id.totalTimer);
         chronometer.setBase(SystemClock.elapsedRealtime());
         totalChronometer.setBase(SystemClock.elapsedRealtime());
+
+        String path = getFilesDir().getAbsolutePath() + "/" + "History.json";
+
+        File file = new File(path);
+
+        if(file.exists()) {
+            try {
+                Gson gson = new Gson();
+                Type type = new TypeToken<ArrayList<String>>() {
+                }.getType();
+
+                InputStream is = openFileInput("History.json");
+                BufferedReader r = new BufferedReader(new InputStreamReader(is));
+                //convert the json string back to object
+                workoutHistory = gson.fromJson(r, type);
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            workoutHistory = new ArrayList<String>();
+        }
 
         Type type = new TypeToken<HashMap<String, ArrayList<Exercise>>>(){}.getType();
         Gson gson = new Gson();
@@ -63,6 +91,7 @@ public class StartWorkout extends AppCompatActivity {
         String exerciseFile = getDefaults("workout",this);
 
         try {
+
             InputStream is1 = openFileInput(exerciseFile + ".json");
             BufferedReader r = new BufferedReader(new InputStreamReader(is1));
             map = gson.fromJson(r, type);
@@ -72,6 +101,8 @@ public class StartWorkout extends AppCompatActivity {
             e.printStackTrace();
         }
 
+
+
         exercisesList = map.get(settingsPreference);
 
         for(int i = 0;i<exercisesList.size();i++){
@@ -79,64 +110,19 @@ public class StartWorkout extends AppCompatActivity {
         }
 
         listView = findViewById(R.id.workoutListview);
-        adapter = new CustomAdapter();
+        ExerciseListAdapter adapter = new ExerciseListAdapter(this,R.layout.custom_view_workout,exercisesList);
+
         listView.setAdapter(adapter);
         totalChronometer.start();
     }
-    class CustomAdapter extends BaseAdapter{
-
-        @Override
-        public int getCount() {
-            return setCounter;
-        }
-
-        @Override
-        public Object getItem(int i) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int i) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
-            View row = null;
-            view = null;
-            row = view;
-            TextView info = view.findViewById(R.id.workoutInfo);
-            ArrayList<String> exercise = new ArrayList<String>();
-            ArrayList<Integer> reps = new ArrayList<Integer>();
-            ArrayList<Integer> weight = new ArrayList<Integer>();
-            if(view == null){
-                view = getLayoutInflater().inflate(R.layout.custom_view_workout,null);
 
 
-                for(int j = 0;j<exercisesList.size();j++){
-                    int k=0;
-                    while(k<exercisesList.get(j).getSets()){
-                        exercise.add(exercisesList.get(j).getName());
-                        reps.add(exercisesList.get(j).getReps());
-                        weight.add(exercisesList.get(j).getWeight());
-                        k++;
-            }
-
-                }
-
-
-            }
-            info.setText(exercise.get(i) + ": " +  reps.get(i).toString() +" X " + weight.get(i).toString());
-
-            return view;
-        }
-    }
 
     public void exerciseDone(View v){
 
         if(counter < setCounter){
             listView.getChildAt(counter).setBackgroundColor(Color.GREEN);
-
+            listView.setCacheColorHint(Color.GREEN);
             counter++;
 
             if(running){
@@ -146,15 +132,15 @@ public class StartWorkout extends AppCompatActivity {
             if(counter == setCounter){
                 String exerciseFile = getDefaults("workout",this);
                 String settingsPreference = getDefaults("DayOfTheWeek",this);
-                workoutHistory = new ArrayList<String>();
                 workoutHistory.add(LocalDateTime.now()
                         .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + ": " + exerciseFile + "/" + settingsPreference);
+
                 Gson gson = new Gson();
                 String json = gson.toJson(workoutHistory);
                 String filename = "History.json";
                 String fileContents = json;
-                FileOutputStream outputStream;
 
+                FileOutputStream outputStream;
                 try {
                     outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
                     outputStream.write(fileContents.getBytes());
@@ -166,6 +152,8 @@ public class StartWorkout extends AppCompatActivity {
         }
 
     }
+
+
     public void undoExercise(View v){
         if(running){
             chronometer.setBase(SystemClock.elapsedRealtime());

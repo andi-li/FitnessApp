@@ -2,6 +2,7 @@ package andi.fitnessapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -63,7 +64,7 @@ public class WorkoutCreator extends AppCompatActivity {
         try {
             Gson gson = new Gson();
             Type type = new TypeToken<HashMap<String, ArrayList<Exercise>>>(){}.getType();
-            InputStream is = openFileInput(nameOfWorkout + ".json");//this.getAssets().open("workout1.json");
+            InputStream is = openFileInput(nameOfWorkout + ".json");
             BufferedReader r = new BufferedReader(new InputStreamReader(is));
             //convert the json string back to object
             weeklyWorkout = gson.fromJson(r, type);
@@ -102,6 +103,8 @@ public class WorkoutCreator extends AppCompatActivity {
     }
 
     public void  finishCreating(View v){
+
+
         weeklyWorkout.put(dayOfTheWeek,dailyWorkout);
         Gson gson = new Gson();
         String json = gson.toJson(weeklyWorkout);
