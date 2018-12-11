@@ -1,6 +1,9 @@
 package andi.fitnessapp;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -65,32 +68,30 @@ public class ExerciseListAdapter extends ArrayAdapter<Exercise> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        ViewHolder holder;
-        final View result;
+        ViewHolder holder = null;
+
         if(convertView == null){
             LayoutInflater inflater = LayoutInflater.from(eContext);
             convertView = inflater.inflate(mResource,parent,false);
 
             holder = new ViewHolder();
             holder.info =convertView.findViewById(R.id.workoutInfo);
+            holder.position = position;
 
-            result = convertView;
             convertView.setTag(holder);
         }
         else{
+
             holder = (ViewHolder) convertView.getTag();
-            result = convertView;
         }
 
         holder.info.setText(exercise.get(position) + ": " +  reps.get(position).toString() +" X " + weight.get(position).toString());
-
-
-
 
         return convertView;
 
     }
     static class ViewHolder{
         TextView info;
+        int position;
     }
 }

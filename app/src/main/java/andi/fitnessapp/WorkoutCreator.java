@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TableRow;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -75,7 +76,7 @@ public class WorkoutCreator extends AppCompatActivity {
 
     }
     public void addPreviousExercise(View v){
-
+        
     }
     public void onAddExerciseField(View v){
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -122,6 +123,9 @@ public class WorkoutCreator extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Toast.makeText
+                (getApplicationContext(), "Workout Saved", Toast.LENGTH_SHORT)
+                .show();
     }
 
     }

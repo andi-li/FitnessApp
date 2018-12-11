@@ -67,19 +67,23 @@
             android:id="@+id/undo"
             android:layout_width="70dp"
             android:layout_height="match_parent"
-            android:onClick="undoExercise"
             android:background="@drawable/buttonstyle"
             android:textColor="@android:color/white"
+            style="?android:attr/buttonBarStyle"
+            android:textSize="14sp"
+            android:textStyle="bold"
             android:text="Undo" />
 
         <Button
             android:id="@+id/done"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:onClick="exerciseDone"
             android:layout_gravity="center"
+            style="?android:attr/buttonBarStyle"
             android:background="@drawable/buttonstyle"
             android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
             android:text="Done" />
 
     </LinearLayout>

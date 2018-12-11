@@ -55,8 +55,8 @@ public class EditWorkout extends AppCompatActivity {
         daySpinner = findViewById(R.id.daySpinner);
         editListView = findViewById(R.id.editWorkoutListView);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.days_of_the_week, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.days_of_the_week, R.layout.custom_spinner);
+        adapter.setDropDownViewResource(R.layout.custom_spinner_drop_down);
         daySpinner.setAdapter(adapter);
 
         final CustomAdapter listAdapter = new CustomAdapter();

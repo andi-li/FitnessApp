@@ -52,6 +52,11 @@ public class StartWorkout extends AppCompatActivity {
     private long offset;
     private int counter = 0;
     private boolean running;
+
+    private Button done;
+    private Button undo;
+
+    private ExerciseListAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +89,8 @@ public class StartWorkout extends AppCompatActivity {
         }
         else{
             workoutHistory = new ArrayList<String>();
+
+
         }
 
         Type type = new TypeToken<HashMap<String, ArrayList<Exercise>>>(){}.getType();
@@ -92,82 +99,117 @@ public class StartWorkout extends AppCompatActivity {
         String exerciseFile = getDefaults("workout",this);
 
         try {
-
             InputStream is1 = openFileInput(exerciseFile + ".json");
             BufferedReader r = new BufferedReader(new InputStreamReader(is1));
             map = gson.fromJson(r, type);
             System.out.println(map.toString());
 
         } catch (IOException e) {
-            e.printStackTrace();
+
         }
 
 
+        if(map.get(settingsPreference)!=null){
+            exercisesList = map.get(settingsPreference);
 
-        exercisesList = map.get(settingsPreference);
-
-        for(int i = 0;i<exercisesList.size();i++){
-            setCounter+=exercisesList.get(i).getSets();
-        }
-
-        listView = findViewById(R.id.workoutListview);
-        ExerciseListAdapter adapter = new ExerciseListAdapter(this,R.layout.custom_view_workout,exercisesList);
-
-        listView.setAdapter(adapter);
-        totalChronometer.start();
-    }
-
-
-
-    public void exerciseDone(View v){
-
-        if(counter < setCounter){
-            listView.getChildAt(counter).setBackgroundColor(Color.rgb((float)75.8,(float)139.9,(float)50.8));
-
-            counter++;
-
-            if(running){
-                chronometer.setBase(SystemClock.elapsedRealtime());
-                offset = 0;
+            for(int i = 0;i<exercisesList.size();i++){
+                setCounter+=exercisesList.get(i).getSets();
             }
-            if(counter == setCounter){
-                String exerciseFile = getDefaults("workout",this);
-                String settingsPreference = getDefaults("DayOfTheWeek",this);
-                workoutHistory.add(LocalDateTime.now()
-                        .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + ": " + exerciseFile + "/" + settingsPreference);
 
-                Gson gson = new Gson();
-                String json = gson.toJson(workoutHistory);
-                String filename = "History.json";
-                String fileContents = json;
+            listView = findViewById(R.id.workoutListview);
+            adapter = new ExerciseListAdapter(this,R.layout.custom_view_workout,exercisesList);
 
-                FileOutputStream outputStream;
-                try {
-                    outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
-                    outputStream.write(fileContents.getBytes());
-                    outputStream.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
+            listView.setAdapter(adapter);
+            totalChronometer.start();
+
+        }
+        else{
+            Toast.makeText
+                    (getApplicationContext(), "No Workout Selected", Toast.LENGTH_SHORT)
+                    .show();
+            Intent i = new Intent(StartWorkout.this, MainActivity.class);
+            startActivity(i);
+        }
+
+        done = findViewById(R.id.done);
+
+        done.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                if(counter == setCounter){
+                    String exerciseFile = getDefaults("workout",StartWorkout.this);
+                    String settingsPreference = getDefaults("DayOfTheWeek",StartWorkout.this);
+                    workoutHistory.add(LocalDateTime.now()
+                            .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + ": " + exerciseFile + "/" + settingsPreference + " Workout Time:" + totalChronometer.getText().toString());
+
+                    Gson gson = new Gson();
+                    String json = gson.toJson(workoutHistory);
+                    String filename = "History.json";
+                    String fileContents = json;
+
+                    FileOutputStream outputStream;
+                    try {
+                        outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
+                        outputStream.write(fileContents.getBytes());
+                        outputStream.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    if(running){
+                        chronometer.stop();
+                        offset = SystemClock.elapsedRealtime()-chronometer.getBase();
+                        running = false;
+                    }
+                    else{
+                        chronometer.setBase(SystemClock.elapsedRealtime()-offset);
+                        chronometer.start();
+                        running = true;
+                    }
+                    Toast.makeText
+                            (getApplicationContext(), "Workout Done", Toast.LENGTH_SHORT)
+                            .show();
                 }
-                Toast.makeText
-                        (getApplicationContext(), "Workout Done", Toast.LENGTH_SHORT)
-                        .show();
+                else{
+                    updateColor(counter,true);
+                    counter++;
+                }
+
             }
-        }
+        });
+
+        undo = findViewById(R.id.undo);
+
+        undo.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                if(running){
+                    chronometer.setBase(SystemClock.elapsedRealtime());
+                    offset = 0;
+                }
+                if(counter>=0){
+                    updateColor(counter,false);
+                    counter--;
+                }
+            }
+        });
+
+
 
     }
 
+    public View getViewByPosition(int pos, ListView listView) {
+        final int firstListItemPosition = listView.getFirstVisiblePosition();
+        final int lastListItemPosition = firstListItemPosition + listView.getChildCount() - 1;
 
-    public void undoExercise(View v){
-        if(running){
-            chronometer.setBase(SystemClock.elapsedRealtime());
-            offset = 0;
+        if (pos < firstListItemPosition || pos > lastListItemPosition ) {
+            listView.setSelection(pos);
+            return listView.getAdapter().getView(pos, null, listView);
+
+        } else {
+            final int childIndex = pos - firstListItemPosition;
+            return listView.getChildAt(childIndex);
         }
-        if(counter!=0){
-            counter--;
-        }
-        listView.getChildAt(counter).setBackgroundColor(Color.WHITE);
     }
+
+
     public static String getDefaults(String key, Context context) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         return preferences.getString(key, null);
@@ -187,6 +229,14 @@ public class StartWorkout extends AppCompatActivity {
             running = false;
         }
 
+    }
+    public void updateColor(int position, boolean bool) {
+        if(listView !=null && bool) {
+            getViewByPosition(position,listView).setBackgroundColor(Color.rgb((float)75.8,(float)139.9,(float)50.8));
+        }
+        else if(listView!=null && !bool){
+            getViewByPosition(position,listView).setBackgroundColor(Color.rgb(47,51,63));
+        }
     }
 
 

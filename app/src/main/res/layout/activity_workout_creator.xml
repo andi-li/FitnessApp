@@ -8,7 +8,7 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/parent_linear_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:orientation="vertical" >
 
@@ -70,16 +70,20 @@
                 android:onClick="onDelete" />
 
         </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="105dp"
+        android:orientation="vertical" >
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:orientation="horizontal" >
-
             <Button
                 android:id="@+id/previousExercise"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="left"
+                android:layout_gravity="start"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="5dp"
@@ -87,14 +91,11 @@
                 android:onClick="addPreviousExercise"
                 android:text="Add Previously Used Exercise"
                 android:textColor="#FFF" />
-
-
         </LinearLayout>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:orientation="horizontal" >
-
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:orientation="horizontal" >
         <Button
             android:id="@+id/addExercise"
             android:layout_width="190dp"
@@ -103,6 +104,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
+            style="?android:attr/buttonBarButtonStyle"
             android:background="@drawable/buttonstyle"
             android:onClick="onAddExerciseField"
             android:text="Add Exercise"
@@ -116,10 +118,12 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
+            style="?android:attr/buttonBarButtonStyle"
             android:background="@drawable/buttonstyle"
             android:onClick="finishCreating"
             android:text="Finish"
             android:textColor="#FFF" />
+        </LinearLayout>
 
     </LinearLayout>
     </LinearLayout>

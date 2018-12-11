@@ -16,9 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-
-import org.w3c.dom.Text;
+import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -163,6 +161,9 @@ public class SettingsActivity extends AppCompatActivity {
     public void save(View v) {
         setDefaults("DayOfTheWeek",getSpinnerStringValue(dSpinner),this);
         setDefaults("workout",getSpinnerStringValue(eSpinner),this);
+        Toast.makeText
+                (getApplicationContext(), "Settings Saved", Toast.LENGTH_SHORT)
+                .show();
     }
     public static void setDefaults(String key, String value, Context context) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
