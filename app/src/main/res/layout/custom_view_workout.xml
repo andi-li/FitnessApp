@@ -2,7 +2,8 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark">
 
 
 
@@ -14,8 +15,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
-        android:background="@color/fbutton_color_transparent"
-        android:backgroundTint="@color/cardview_light_background"
+        android:background="@drawable/buttonstyle"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:textSize="36sp" />
 
@@ -30,7 +30,7 @@
         android:gravity="center"
         android:text="Example"
         android:textAlignment="center"
-        android:textColor="@color/cardview_dark_background"
+        android:textColor="@android:color/white"
         android:textSize="30sp"
         android:textStyle="bold" />
 </RelativeLayout>

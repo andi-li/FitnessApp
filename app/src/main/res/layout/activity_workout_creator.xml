@@ -2,7 +2,8 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:background="@color/colorPrimaryDark">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/parent_linear_layout"
@@ -23,6 +24,7 @@
                 android:layout_weight="5"
                 android:ems="10"
                 android:hint="Exercise(Bench Press)"
+                android:textColor="@android:color/white"
                 android:inputType="textPersonName"
                 android:autofillHints="" />
 
@@ -33,6 +35,7 @@
                 android:layout_weight="5"
                 android:ems="10"
                 android:hint="sets"
+                android:textColor="@android:color/white"
                 android:inputType="number"
                 android:autofillHints="" />
 
@@ -43,6 +46,7 @@
                 android:layout_weight="5"
                 android:ems="10"
                 android:hint="reps"
+                android:textColor="@android:color/white"
                 android:inputType="number"
                 android:autofillHints="" />
 
@@ -53,6 +57,7 @@
                 android:layout_weight="5"
                 android:ems="10"
                 android:hint="weight"
+                android:textColor="@android:color/white"
                 android:inputType="number"
                 android:autofillHints="" />
 
@@ -65,6 +70,26 @@
                 android:onClick="onDelete" />
 
         </LinearLayout>
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/previousExercise"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/buttonstyle"
+                android:onClick="addPreviousExercise"
+                android:text="Add Previously Used Exercise"
+                android:textColor="#FFF" />
+
+
+        </LinearLayout>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="55dp"
@@ -72,26 +97,26 @@
 
         <Button
             android:id="@+id/addExercise"
-            android:layout_width="200dp"
+            android:layout_width="190dp"
             android:layout_height="match_parent"
             android:layout_gravity="left"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
-            android:background="#555"
+            android:background="@drawable/buttonstyle"
             android:onClick="onAddExerciseField"
             android:text="Add Exercise"
             android:textColor="#FFF" />
 
         <Button
             android:id="@+id/FinishExercise"
-            android:layout_width="200dp"
+            android:layout_width="190dp"
             android:layout_height="match_parent"
             android:layout_gravity="right"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
-            android:background="#555"
+            android:background="@drawable/buttonstyle"
             android:onClick="finishCreating"
             android:text="Finish"
             android:textColor="#FFF" />

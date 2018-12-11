@@ -2,7 +2,8 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:background="@color/colorPrimaryDark">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/dayOfWeek"
@@ -23,6 +24,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:text="Select Day"
+                android:textColor="@android:color/white"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
             <Spinner
@@ -44,6 +46,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:text="Select Workout"
+                android:textColor="@android:color/white"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
             <Spinner
@@ -51,6 +54,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
+                android:textColor="@android:color/white"
                 android:layout_weight="1" />
         </LinearLayout>
 
@@ -61,8 +65,10 @@
             android:layout_gravity="left"
             android:layout_weight="1"
             android:text="Timer"
+            android:textColor="@android:color/white"
             android:textOff="Timer Off"
-            android:textOn="Timer On" />
+            android:textOn="Timer On"
+            android:textSize="24sp" />
 
         <LinearLayout
             android:id="@+id/save"
@@ -75,6 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:onClick="save"
+                android:background="@drawable/buttonstyle"
                 android:text="Save" />
         </LinearLayout>
 

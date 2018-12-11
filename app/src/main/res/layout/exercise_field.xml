@@ -1,7 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:background="@color/colorPrimaryDark">
 
     <EditText
         android:id="@+id/exerciseInput"
@@ -10,6 +11,8 @@
         android:layout_weight="5"
         android:ems="10"
         android:hint="Exercise(Bench Press)"
+        android:textColorHint="@android:color/white"
+        android:textColor="@android:color/white"
         android:inputType="textPersonName"
         android:autofillHints="" />
 
@@ -21,6 +24,8 @@
         android:ems="10"
         android:hint="sets"
         android:inputType="number"
+        android:textColorHint="@android:color/white"
+        android:textColor="@android:color/white"
         android:autofillHints="" />
 
     <EditText
@@ -31,6 +36,8 @@
         android:ems="10"
         android:hint="reps"
         android:inputType="number"
+        android:textColorHint="@android:color/white"
+        android:textColor="@android:color/white"
         android:autofillHints="" />
 
     <EditText
@@ -41,6 +48,8 @@
         android:ems="10"
         android:hint="weight"
         android:inputType="number"
+        android:textColorHint="@android:color/white"
+        android:textColor="@android:color/white"
         android:autofillHints="" />
 
     <Button

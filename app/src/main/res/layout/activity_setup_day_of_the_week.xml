@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorPrimaryDark"
     tools:context=".SetupDayOfTheWeek">
 
 
@@ -15,6 +16,7 @@
         android:ems="10"
         android:hint="Workout Name (Workout 1)"
         android:layout_gravity="center"
+        android:textColor="@android:color/white"
         android:inputType="textPersonName" />
 
     <Button
@@ -23,6 +25,8 @@
         android:layout_height="wrap_content"
         android:onClick="monday"
         android:layout_weight="1"
+        android:background="@drawable/buttonstyle"
+        android:textColor="@android:color/white"
         android:text="Monday" />
 
     <Button
@@ -31,35 +35,47 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:onClick="tuesday"
+        android:background="@drawable/buttonstyle"
+        android:textColor="@android:color/white"
         android:text="Tuesday" />
     <Button
         android:id="@+id/Wednesday"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:background="@drawable/buttonstyle"
+        android:textColor="@android:color/white"
         android:text="Wednesday" />
     <Button
         android:id="@+id/Thursday"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:background="@drawable/buttonstyle"
+        android:textColor="@android:color/white"
         android:text="Thursday" />
     <Button
         android:id="@+id/Friday"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:background="@drawable/buttonstyle"
+        android:textColor="@android:color/white"
         android:text="Friday" />
     <Button
         android:id="@+id/Saturday"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:background="@drawable/buttonstyle"
+        android:textColor="@android:color/white"
         android:text="Saturday" />
     <Button
         android:id="@+id/Sunday"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:background="@drawable/buttonstyle"
+        android:textColor="@android:color/white"
         android:text="Sunday" />
 </LinearLayout>

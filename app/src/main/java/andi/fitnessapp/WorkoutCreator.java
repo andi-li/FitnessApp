@@ -74,6 +74,9 @@ public class WorkoutCreator extends AppCompatActivity {
         }
 
     }
+    public void addPreviousExercise(View v){
+
+    }
     public void onAddExerciseField(View v){
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View rowView = inflater.inflate(R.layout.exercise_field, null);

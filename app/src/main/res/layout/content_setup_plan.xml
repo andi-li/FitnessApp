@@ -4,16 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".SetupPlan"
     tools:showIn="@layout/activity_setup_plan">
 
     <Button
         android:id="@+id/editPlan"
-        android:layout_width="220dp"
+        android:layout_width="240dp"
         android:layout_height="71dp"
         android:text="Edit Plan"
         android:textSize="18sp"
+        android:background="@drawable/buttonstyle"
+        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
@@ -23,10 +26,12 @@
 
     <Button
         android:id="@+id/createPlan"
-        android:layout_width="220dp"
+        android:layout_width="240dp"
         android:layout_height="71dp"
         android:textSize="18sp"
         android:text="Create Plan"
+        android:background="@drawable/buttonstyle"
+        android:textColor="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/button7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
@@ -35,10 +40,12 @@
 
     <Button
         android:id="@+id/button7"
-        android:layout_width="220dp"
+        android:layout_width="240dp"
         android:layout_height="71dp"
         android:textSize="18sp"
         android:text="Import Custom Plan"
+        android:background="@drawable/buttonstyle"
+        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

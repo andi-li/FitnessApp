@@ -10,6 +10,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
+    android:background="@color/colorPrimaryDark"
         android:padding="10dp">
 
         <EditText
@@ -18,7 +19,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:textColor="#000"
+            android:textColorHint="@android:color/white"
+            android:textColor="@android:color/white"
             android:textSize="30dp" />
 
         <EditText
@@ -29,6 +31,8 @@
             android:layout_alignParentStart="true"
             android:layout_marginStart="210dp"
             android:gravity="center"
+            android:textColorHint="@android:color/white"
+            android:textColor="@android:color/white"
             android:inputType="number"/>
 
 
@@ -38,6 +42,8 @@
             android:layout_height="50dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="150dp"
+            android:textColorHint="@android:color/white"
+            android:textColor="@android:color/white"
             android:inputType="number"
             />
 
@@ -47,6 +53,8 @@
             android:layout_height="50dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="270dp"
+            android:textColorHint="@android:color/white"
+            android:textColor="@android:color/white"
             android:inputType="number"
             />
 

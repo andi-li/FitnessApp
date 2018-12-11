@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorPrimaryDark"
     tools:context=".History">
 
     <ListView
@@ -13,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:scrollingCache="true">
+         android:scrollingCache="true">
 
 
     </ListView>
@@ -24,8 +25,12 @@
         <Button
             android:id="@+id/deleteHistory"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
+            android:textColor="@android:color/white"
+            android:background="@drawable/buttonstyle"
             android:layout_gravity="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
             android:text="Delete History" />
 
     </LinearLayout>
