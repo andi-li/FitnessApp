@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -121,8 +122,8 @@ public class StartWorkout extends AppCompatActivity {
     public void exerciseDone(View v){
 
         if(counter < setCounter){
-            listView.getChildAt(counter).setBackgroundColor(Color.GREEN);
-            listView.setCacheColorHint(Color.GREEN);
+            listView.getChildAt(counter).setBackgroundColor(Color.rgb((float)75.8,(float)139.9,(float)50.8));
+
             counter++;
 
             if(running){
@@ -148,6 +149,9 @@ public class StartWorkout extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                Toast.makeText
+                        (getApplicationContext(), "Workout Done", Toast.LENGTH_SHORT)
+                        .show();
             }
         }
 

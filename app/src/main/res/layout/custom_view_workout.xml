@@ -7,18 +7,6 @@
 
 
 
-    <Button
-        android:id="@+id/workout"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
-        android:background="@drawable/buttonstyle"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        android:textSize="36sp" />
-
     <TextView
         android:id="@+id/workoutInfo"
         android:layout_width="match_parent"

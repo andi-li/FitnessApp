@@ -33,3 +33,7 @@ task clean(type: Delete) {
 configurations {
     all*.exclude group: 'com.google.code.gson'
 }
+configurations.all {
+    resolutionStrategy {
+        force 'com.android.support:support-v4:27.1.1'
+    }}
