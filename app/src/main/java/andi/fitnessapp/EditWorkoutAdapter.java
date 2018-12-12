@@ -60,6 +60,7 @@ public class EditWorkoutAdapter extends ArrayAdapter<Exercise> {
             holder.sets.setId(position);
             holder.reps.setId(position);
             holder.weight.setId(position);
+            holder.delete.setId(position);
 
             convertView.setTag(holder);
         }
@@ -78,7 +79,9 @@ public class EditWorkoutAdapter extends ArrayAdapter<Exercise> {
             @Override
             public void onClick(View view) {
                 if(exercisesList.size() > 0){
+                    final int position = view.getId();
                     exercisesList.remove(position);
+                    EditWorkoutAdapter.this.notifyDataSetChanged();
                 }
             }
         });

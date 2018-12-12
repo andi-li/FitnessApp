@@ -39,6 +39,7 @@ public class EditWorkout extends AppCompatActivity {
     private String workoutName;
     private HashMap<String, ArrayList<Exercise>> weeklyWorkout;
     private EditWorkoutAdapter editAdapter;
+    ArrayList<Exercise> exercisesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +69,7 @@ public class EditWorkout extends AppCompatActivity {
         loadWorkoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArrayList<Exercise> exercisesList = weeklyWorkout.get(getSpinnerStringValue(daySpinner));
+                exercisesList = weeklyWorkout.get(getSpinnerStringValue(daySpinner));
                 editAdapter = new EditWorkoutAdapter(EditWorkout.this,R.layout.exercise_field,exercisesList);
                 editListView.setAdapter(editAdapter);
 
@@ -82,6 +83,11 @@ public class EditWorkout extends AppCompatActivity {
         TextView textView = (TextView) s.getSelectedView();
         String result = textView.getText().toString();
         return result;
+    }
+    public void addExercise(View v){
+        Exercise e = new Exercise("New Exercise",0,0,0);
+        exercisesList.add(e);
+        editAdapter.notifyDataSetChanged();
     }
     public void save(View v){
         Gson gson = new Gson();
