@@ -217,6 +217,18 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
     }
+    public void clearEverything(View v){
+        deleteRecursive(this.getFilesDir());
+    }
+    void deleteRecursive(File fileOrDirectory) {
+
+        if (fileOrDirectory.isDirectory())
+            for (File child : fileOrDirectory.listFiles())
+                deleteRecursive(child);
+
+        fileOrDirectory.delete();
+
+    }
 
 
 }

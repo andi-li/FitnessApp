@@ -139,7 +139,7 @@ public class StartWorkout extends AppCompatActivity {
                     String exerciseFile = getDefaults("workout",StartWorkout.this);
                     String settingsPreference = getDefaults("DayOfTheWeek",StartWorkout.this);
                     workoutHistory.add(LocalDateTime.now()
-                            .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + ": " + exerciseFile + "/" + settingsPreference + " Workout Time:" + totalChronometer.getText().toString());
+                            .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + " Workout Time:" + totalChronometer.getText().toString() + "| " + exerciseFile + "/" + settingsPreference);
 
                     Gson gson = new Gson();
                     String json = gson.toJson(workoutHistory);

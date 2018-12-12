@@ -81,7 +81,7 @@ public class History extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> adapter, View view, int position, long arg) {
                     Intent appInfo = new Intent(History.this, WorkoutHistoryViewer.class);
-                    String info = historyOfWorkout.get(position).substring(historyOfWorkout.get(position).lastIndexOf(":") + 1);
+                    String info = historyOfWorkout.get(position).substring(historyOfWorkout.get(position).lastIndexOf("|") + 1);
                     String[] parts = info.split("/");
                     String workoutName = parts[0];
                     String day = parts[1];
@@ -91,6 +91,7 @@ public class History extends AppCompatActivity {
                 }
             });
         }
+
 
    }
     void deleteRecursive(File fileOrDirectory) {

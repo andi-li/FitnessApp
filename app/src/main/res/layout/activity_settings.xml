@@ -139,6 +139,17 @@
             android:textOn="Timer On"
             android:textSize="24sp" />
 
+        <Button
+            android:id="@+id/clearEverything"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="clearEverything"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:background="@drawable/buttonstyle"
+            android:text="Clear Everything" />
+
         <LinearLayout
             android:id="@+id/save"
             android:layout_width="match_parent"
