@@ -56,7 +56,6 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
-                style= "@style/MySpinnerStyle"
                 android:layout_weight="1" />
         </LinearLayout>
 
@@ -89,13 +88,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
+                android:inputType="text"
                 android:hint="Enter Weight in lbs"
                 android:textColorHint="@android:color/white"
                 android:textColor="@android:color/white"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
             <Spinner
-                android:id="@+id/reps"
+                android:id="@+id/repsSpinner"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"

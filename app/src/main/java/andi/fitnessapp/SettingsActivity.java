@@ -46,7 +46,7 @@ public class SettingsActivity extends AppCompatActivity {
         listOfWorkouts = new ArrayList<String>();
         dSpinner = findViewById(R.id.daySpinner);
         eSpinner = findViewById(R.id.workoutSpinner);
-        rSpinner = findViewById(R.id.reps);
+        rSpinner = findViewById(R.id.repsSpinner);
         porKSpinner = findViewById(R.id.lbsOrKilos);
 
         File file = this.getFilesDir();
@@ -80,9 +80,11 @@ public class SettingsActivity extends AppCompatActivity {
         rSpinner.setAdapter(repAdapter);
         porKSpinner.setAdapter(lbsOrKilosAdapter);
 
+        if(settingsDayPreference != null && exerciseFile !=null){
+            dSpinner.setSelection(retrieveAllStringsAndGetIndex(dSpinner,settingsDayPreference));
+            eSpinner.setSelection(retrieveAllStringsAndGetIndex(eSpinner,exerciseFile));
 
-        dSpinner.setSelection(retrieveAllStringsAndGetIndex(dSpinner,settingsDayPreference));
-        eSpinner.setSelection(retrieveAllStringsAndGetIndex(eSpinner,exerciseFile));
+        }
 
         porKSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -137,12 +139,15 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void updateText(){
         int spinnerState = Integer.parseInt(rSpinner.getSelectedItem().toString());
-        if(!weightText.getText().toString().equals("")){
+        if(!weightText.getText().toString().equals("") && isNumeric(weightText.getText().toString())){
             int weight = Integer.parseInt(weightText.getText().toString());
 
             predictedMax.setText(calculateOneRepMax(weight,spinnerState) + " lbs");
         }
 
+    }
+    public boolean isNumeric(String s) {
+        return s != null && s.matches("[-+]?\\d*\\.?\\d+");
     }
     @Override
     protected void onResume(){

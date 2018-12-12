@@ -109,7 +109,7 @@ public class StartWorkout extends AppCompatActivity {
         }
 
 
-        if(map.get(settingsPreference)!=null){
+        if(map!=null){
             exercisesList = map.get(settingsPreference);
 
             for(int i = 0;i<exercisesList.size();i++){
